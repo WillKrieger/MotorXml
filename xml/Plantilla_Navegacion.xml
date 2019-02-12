@@ -1,0 +1,25 @@
+﻿<navegacion>
+  <agrupador idEntidad="1" idFormulario="1" id="2285" titulo="ISSIF" Orden="1" idTipoFlujo="1,2">
+    <seccion idControlFormulario="540001" tituloSeccion="Información Sobre tu Situación Fiscal" tipoSeccion="Anexo" Orden="1" idTipoFlujo="1,2" />
+  </agrupador>
+  <agrupador idEntidad="1" idFormulario="1" id="1" titulo="Datos Informativos" Orden="2">
+    <seccion idControlFormulario="10" tituloSeccion="Datos Iniciales" tipoSeccion="Anexo" Orden="1" idTipoFlujo="0,2" />
+    <seccion idControlFormulario="14" tituloSeccion="Estado de Resultados" tipoSeccion="Anexo" Orden="2" idTipoFlujo="0,2" />
+    <seccion idControlFormulario="18" tituloSeccion="Balance" tipoSeccion="Anexo" Orden="3" idTipoFlujo="0,2" />
+    <seccion idControlFormulario="22" tituloSeccion="Inversiones" tipoSeccion="Anexo" Orden="4" />
+    <seccion idControlFormulario="26" tituloSeccion="Costo de Venta Fiscal" tipoSeccion="Anexo" Orden="5" idTipoFlujo="0,2" />
+    <seccion idControlFormulario="28" tituloSeccion="Conciliación Contable Fiscal" tipoSeccion="Anexo" Orden="6" idTipoFlujo="0,2" />
+    <seccion idControlFormulario="32" tituloSeccion="Deducciones Autorizadas" tipoSeccion="Anexo" Orden="7" idTipoFlujo="0,2" />
+    <seccion idControlFormulario="36" tituloSeccion="Cifras al Cierre " tipoSeccion="Anexo" Orden="8" />
+    <seccion idControlFormulario="40" tituloSeccion="PTU" tipoSeccion="Anexo" Orden="9" idTipoFlujo="0,2" />
+    <seccion idControlFormulario="44" tituloSeccion="Dividendos o Utilidades Distribuidos" tipoSeccion="Anexo" Orden="11" />
+  </agrupador>
+  <agrupador idEntidad="1" idFormulario="1" id="2" titulo="ISR" idEntidadPropiedad="15" idPropiedad="SUMAC26" Orden="3">
+    <seccion idControlFormulario="52" tituloSeccion="Determinación del ISR" tipoSeccion="Determinación del Impuesto" Orden="1" />
+    <seccion idControlFormulario="90" tituloSeccion="Determinación del Pago ISR " tipoSeccion="Determinación del Pago" Orden="2" />
+    <seccion idControlFormulario="510000" tituloSeccion="Determinación del Pago ISR de Contratistas y Asignatarios de Hidrocarburos" tipoSeccion="Determinación del Pago" Orden="3" />
+  </agrupador>
+  <agrupador idEntidad="1" idFormulario="1" id="3" titulo="ISR REFIPRES" idEntidadPropiedad="33" idPropiedad="354" Orden="4">
+    <seccion idControlFormulario="93" tituloSeccion="Determinación del Pago del Impuesto sobre Ingresos Sujetos a Regímenes Fiscales Preferentes" tipoSeccion="Determinación del Pago" Orden="1" />
+  </agrupador>
+</navegacion>

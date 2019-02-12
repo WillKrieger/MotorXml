@@ -1,0 +1,19 @@
+{
+  "name": "Declaraciones SAT",
+  "version": "0.1.0",
+  "description": "Declaraciones SAT.",
+  "main": "stepthree.html",
+  "window": {
+    "width": 1150,
+    "height": 700,
+    "show": true,
+    "title": "Declaraciones SAT",
+    "toolbar": false
+  },
+  "webkit": {
+    "plugin": true,
+    "java": true
+  },
+  "node-remote": "*.sat.gob.mx, *.cloudapp.net",
+  "single-instance": true
+}

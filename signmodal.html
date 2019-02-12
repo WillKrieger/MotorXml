@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+
+    <title>Declaraciones SAT</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="css/app.css" rel="stylesheet" media="screen">
+    <style>
+        #sign-modal
+        {
+            padding: 50px 0 0 0;
+        }
+
+        body
+        {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="sign-modal" class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">Firma declaración</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="inputRFC" class="control-label col-xs-3">RFC</label>
+                            <div class="col-xs-8">
+                                <input disabled="disabled" type="text" id="inputRFC" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputLlavePrivada" class="control-label col-xs-3">Llave privada (.KEY)</label>
+                            <div class="col-xs-8">
+                                <div class="input-group">
+                                    <input type="text" disabled="disabled" id="inputLlavePrivada" class="form-control" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-red" id="btn-upload-key" type="button">...</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputCert" class="control-label col-xs-3">Certificado (.CER)</label>
+                            <div class="col-xs-8">
+                                <div class="input-group">
+                                    <input type="text" disabled="disabled" id="inputCert" class="form-control" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-red" id="btn-upload-cer" type="button">...</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputContrasenia" class="control-label col-xs-3">Contraseña</label>
+                            <div class="col-xs-8">
+                                <input type="password" id="inputContrasenia" class="form-control" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="pull-right">
+                            <button class="btn btn-red" id="btn-continuar">Continuar</button>
+                            <button class="btn btn-red" id="btn-cancelar">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-confirm" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Mensaje de confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-lg-11">
+                            <h5 id="mensaje-confirmacion">La declaración se enviará sin firmar. ¿Esta seguro? </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="cancelar-sin-firma">Cancelar</button>
+                    <button type="button" class="btn btn-red" id="confimar-sin-firma">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAlertClient" class="modal fade" style="z-index: 9999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="si btn btn-primary btn-red">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DVOPER" class="sat-div-sign hide">-</div>
+    <div id="DVRFC" class="sat-div-sign hide">-</div>
+    <div id="DVKEY" class="sat-div-sign hide">-</div>
+    <div id="DVCER" class="sat-div-sign hide">-</div>
+    <div id="DVINFOALERTCLIENT" class="sat-div-sign hide">-</div>
+    <div id="DVINFOALERTCLIENTORIGIN" class="sat-div-sign hide">-</div>
+
+    <!-- Carga los scripts despues del HTML (best-practices) -->
+    <script type='text/javascript' src="js/3rdparty/namespace.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/jquery-1.7.2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/bootstrap.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/knockout-2.3.0.js"></script>
+    <!-- Script de ayuda -->
+    <script type='text/javascript' src="js/fb.helper.js"></script>
+    <script type='text/javascript' src="js/fb.utils.js"></script>
+    <script type='text/javascript' src="js/fb.xmlform.js"></script>
+    <script type='text/javascript' src="js/sat.utils.js"></script>
+    <!-- Scripts de la aplicacion principal -->
+    <script type='text/javascript' src="js/app.js"></script>
+    <script type='text/javascript' src="js/appui.js"></script>
+    <script type='text/javascript' src="js/appconfig.js"></script>
+    <!-- Script para Modal de Compensaciones -->
+    <script type='text/javascript' src="js/compensaciones.js"></script>
+    <!-- Componente de construccion de html -->
+    <script type='text/javascript' src="js/fb.htmlbuilder.js"></script>
+    <!-- Componente que genera las reglas y validaciones -->
+    <script type='text/javascript' src="js/fb.runtime.js"></script>
+    <!-- Componente que genera un repositorio de catalogos -->
+    <script type='text/javascript' src="js/fb.catalogs.js"></script>
+    <!-- Componente de parseo -->
+    <script type='text/javascript' src="js/fb.parser.js"></script>
+    <!-- Scripts de la aplicacion principal -->
+    <script type='text/javascript' src="js/sat.environment.js"></script>
+    <!-- Se cargan al final los scripts que no seran utilizados en un principio,
+	se modificara para cargarlos asincronamente -->
+    <script type='text/javascript' src="js/3rdparty/jquery.maskedinput.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/base64.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/json2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        "use strict";
+
+        $(document).ready(function () {
+            AppDeclaracionesSAT.initProxyDivsSign();
+            var Enum_OperationType = { OPUPLOADKEY: "OPUPLOADKEY", OPUPLOADCER: "OPUPLOADCER", OPCONTINUAR: "OPCONTINUAR", OPSINFIRMA: "OPSINFIRMA" };
+
+            $("#sign-modal #btn-upload-key").bind('click', function () {
+                sendOperation(Enum_OperationType.OPUPLOADKEY, {});
+            });
+
+            $("#sign-modal #btn-upload-cer").bind('click', function () {
+                sendOperation(Enum_OperationType.OPUPLOADCER, {});
+            });
+
+            $("#sign-modal #btn-continuar").bind('click', function () {
+                sendOperation(Enum_OperationType.OPCONTINUAR, { contrasenia: $("#inputContrasenia").val() });
+            });
+
+            $("#sign-modal #btn-cancelar").bind('click', function () {
+                $("#modal-confirm").modal("show");
+            });
+
+            $("#confimar-sin-firma").bind('click', function () {
+                sendOperation(Enum_OperationType.OPSINFIRMA, {});
+                $("#modal-confirm").modal("hide");
+            });
+
+            $("#cancelar-sin-firma").bind('click', function () {
+                $("#modal-confirm").modal("hide");
+            });
+
+            function sendOperation(operationType, operationParameters) {
+                var operacion = {
+                    operacion: operationType,
+                    parametros: operationParameters
+                };
+                $('#DVOPER').html(JSON.stringify(operacion));
+            }
+        });
+    </script>
+</body>
+</html>

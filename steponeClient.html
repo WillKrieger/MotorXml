@@ -1,0 +1,546 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
+
+    <title>Declaraciones SAT</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="css/app.css" rel="stylesheet" media="screen">
+    <style>
+        .container-main
+        {
+            border: solid #474748 1px;
+            padding-bottom: 15px;
+        }
+
+        .icon-2
+        {
+            font-size: 3em;
+        }
+
+        .sat-list-forms i.sat-icon-right
+        {
+            float: right;
+            font-size: 24px;
+        }
+
+        .sat-list-forms i.sat-icon-left
+        {
+            float: left;
+            padding-right: 15px;
+            font-size: 24px;
+        }
+
+        .sat-list-forms .popover
+        {
+            max-width: 400px !important;
+        }
+
+        .sat-pnl-new-form button
+        {
+            margin-left: 50px;
+        }
+
+        .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus
+        {
+            color: #000000;
+            background-color: #E8E8EB;
+            border-color: #E8E8EB;
+        }
+
+        .sat-height-fieldfield {
+            display: block; */
+            background: transparent;
+            /* height: 30px; */
+            width: 95%;
+            -webkit-border-radius: 3px 3px 0 0;
+            border-radius: 4px 4px 0 0;
+            border: solid 2px #CCCCCC;
+            border-bottom: solid 3px #000;
+            padding: .6em;
+            padding-left: 0px;
+            padding-right: 10px !important;
+            color: #2D302B;
+            font-size: 1.4em;
+            background-color: #FFF;
+            margin-bottom: 1em;
+            margin-top: 1em;
+            margin-left: 0%;
+            margin-right: 5%;
+            text-align: left;
+            text-align: right;
+            text-indent: 5px;
+        }
+
+        .export {
+            float: right;
+            font-size: 21px;
+            font-weight: bold;
+            line-height: 1;
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+            opacity: .2;
+            padding-right: 15px;
+        }
+        .export:hover, .export:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            opacity: .5;
+            filter: alpha(opacity=50)
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-header">
+            <img src="img/sat.png" style="width: 77%;" />
+        </div>
+
+        <!--<form class="navbar-form navbar-right" role="search">
+			<div class="form-group" style="width: auto;">
+				<span type="text" class="form-control" placeholder="">
+					<b id="nombreContribuyente"> </b> [<label id="rfc"> </label>]
+				</span>
+			</div>
+			<div class="form-group" style="font-size: 30px;">
+				<button id="cerrarSesion" type="button" class="btn btn-primary btn-red">
+					<i class="icon-signout"> </i>Cerrar sesión
+				</button>
+			</div>
+		</form>-->
+    </nav>
+    <!-- /navbar -->
+
+    <nav class="navbar navbar-default" role="navigation">
+        <h3>Paso</h3>
+        <span class="circle">1</span>
+        <h3>de 4. Selección de la declaración</h3>
+    </nav>
+    <!-- /nav-steps -->
+
+    <div class="container container-main">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Formularios</h2>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-5" style="font-size: 18px;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="hide tplformas">
+                <a href="javascript:void(0);" class="list-group-item">
+                    <i class="icon-file-text sat-icon-left"></i>
+                    <span></span>
+                </a>
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5">
+                <div class="input-group input-group-md">
+                    <div class="">RFC</div>
+                    <select id="rfcCombo" class="form-control" style="font-size: 16px;">
+                    </select>
+                </div>
+                <br />
+                <div class="sat-list-forms">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Elegir una forma anterior</div>
+                        <div class="panel-body">
+                            <ul class="list-group item-removing"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-5 sat-pnl-new-form">
+                <button id="newForm" type="button" class="btn btn-red btn-default btn-lg">
+                    Iniciar una nueva forma &nbsp &nbsp
+                </button>
+                <br />
+                <br />
+                <button id="importForm" type="button" class="btn btn-red btn-default btn-lg">
+                    Importar una declaración
+                </button>
+                <div id="contenedortipoforma" style="width: 70%; padding-top: 15px; display: none;">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input name="tipoforma" valor="contrasena" type="radio">
+                        </span>
+                        <label class="form-control">Contraseña</label>
+                    </div>
+                    <br />
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <input name="tipoforma" valor="fiel" type="radio">
+                        </span>
+                        <label class="form-control">FIEL</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+
+    <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Cargando información.</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-lg-11">
+                            <i class="icon-spinner icon-spin icon-large icon-6x"></i>
+                            Espere por favor mientras termina de cargar la información necesaria.
+					
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-confirm-delete" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Mensaje de confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-lg-11">
+                            <h5 id="mensaje-confirmacion">¿Realmente desea eliminar la forma <strong>{0}</strong>?</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="cancelar-eliminacion">Cancelar</button>
+                    <button type="button" class="btn btn-red" id="confimar-eleminacion">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-confirm-export" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Mensaje de confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-lg-11">
+                            <h5 id="mensaje-confirmacion">¿Desea exportar la forma <strong>{0}</strong>?</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="cancelar-exportacion">Cancelar</button>
+                    <button type="button" class="btn btn-red" id="confimar-exportacion">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAlertClient" class="modal fade" style="z-index: 9999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="si btn btn-primary btn-red">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAlertOptionMac" class="modal fade" style="z-index: 9999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                    Seleccione una opción para iniciar una nueva forma.
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="si btn btn-primary btn-red">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalRFC" class="modal fade" style="z-index: 9999" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            Estimado contribuyente, ingrese un RFC para crear una declaración.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input id="rfc" type="text" maxlength="12" onchange="ValidarRFC(event)" class="form-control sat-height-field" placeholder="RFC de contribuyente">
+                        </div>
+                    </div>
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="cancelar btn btn-primary btn-red">
+                        Cancelar
+                    </button>
+                    <button type="button" class="aceptar btn btn-primary btn-red">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DVMAC" class="sat-div-contenedores hide">-</div>
+    <div id="DVOPER" class="sat-div-contenedores hide">-</div>
+    <div id="DVOFRMGRD" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOCON" class="sat-div-contenedores hide">-</div>
+    <div id="DVRFCCOMBO" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOALERTCLIENT" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOALERTCLIENTORIGIN" class="sat-div-contenedores hide">-</div>
+
+    <!-- Carga los scripts despues del HTML (best-practices) -->
+    <script type='text/javascript' src="js/3rdparty/namespace.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/jquery-1.7.2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/bootstrap.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/knockout-2.3.0.js"></script>
+    <!-- Script de ayuda -->
+    <script type='text/javascript' src="js/fb.helper.js"></script>
+    <script type='text/javascript' src="js/fb.utils.js"></script>
+    <script type='text/javascript' src="js/fb.xmlform.js"></script>
+    <script type='text/javascript' src="js/sat.utils.js"></script>
+    <!-- Scripts de la aplicacion principal -->
+    <script type='text/javascript' src="js/app.js"></script>
+    <script type='text/javascript' src="js/appui.js"></script>
+    <script type='text/javascript' src="js/appconfig.js"></script>
+    <!-- Script para Modal de Compensaciones -->
+    <script type='text/javascript' src="js/compensaciones.js"></script>
+    <!-- Componente de construccion de html -->
+    <script type='text/javascript' src="js/fb.htmlbuilder.js"></script>
+    <!-- Plugins que generan los controles visuales (htmldom)  -->
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.cuadrocompensaciones.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.list.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.textbox.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.decimal.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.checkbox.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.radio.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.label.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.indexador.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.controlvacio.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.combobox.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.controlesgrid.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.fecha.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.cuadrodialogo.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.controlbase.js"></script>
+    <!-- Componente del Modelo del formulario -->
+    <script type='text/javascript' src="js/fb.viewmodel.js"></script>
+    <!-- Componente que genera las reglas y validaciones -->
+    <script type='text/javascript' src="js/fb.runtime.js"></script>
+    <!-- Componente que genera un repositorio de catalogos -->
+    <script type='text/javascript' src="js/fb.catalogs.js"></script>
+    <!-- Componente de parseo -->
+    <script type='text/javascript' src="js/fb.parser.js"></script>
+    <!-- Scripts de la aplicacion principal -->
+    <script type='text/javascript' src="js/sat.environment.js"></script>
+    <!-- Se cargan al final los scripts que no seran utilizados en un principio,
+	se modificara para cargarlos asincronamente -->
+    <script type='text/javascript' src="js/3rdparty/jquery.maskedinput.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/base64.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/json2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        "use strict";
+
+        $(document).ready(function () {
+            AppDeclaracionesSAT.initStepOne();
+            AppDeclaracionesSAT.initProxyDivs();
+            (function () {
+                $('#modalRFC .modal-footer .aceptar').on('click', function () {
+                    var parametros = {};
+                    var that = this;
+
+                    parametros['rfc'] = $('#modalRFC .modal-body #rfc').val().trim().toLocaleUpperCase();
+
+                    if (parametros['rfc'] === undefined || parametros['rfc'] === '') {
+                        setTimeout(function () {
+                            $(that).popover('hide');
+                        }, 1000 * 3);
+
+                        $(that).popover('destroy');
+                        $(that).popover({
+                            trigger: 'manual',
+                            content: "El campo RFC es obligatorio.",
+                            placement: "bottom"
+                        }).popover('show');
+                    } else if (!RFCMORALES(parametros['rfc'])) {
+                        setTimeout(function () {
+                            $(that).popover('hide');
+                        }, 1000 * 3);
+
+                        $(that).popover('destroy');
+                        $(that).popover({
+                            trigger: 'manual',
+                            content: "El campo RFC no cumple con el formato",
+                            placement: "bottom"
+                        }).popover('show');
+                    } else {
+                        var operacion = {
+                            operacion: "OPNUEVAFORMA",
+                            parametros: parametros
+                        };
+                        $('#DVOPER').html(JSON.stringify(operacion));
+
+                        $('#modalRFC').modal('hide');
+                    }
+                });
+
+                $('#importForm').on('click', function () {
+                    var operacion = {
+                        operacion: "OPIMPORTAR",
+                        parametros: {}
+                    };
+                    $('#DVOPER').html(JSON.stringify(operacion));
+                });
+
+                $('#newForm').on('click', function () {
+                    $('#modalRFC').modal('show');
+                    // var parametros = {};
+
+                    // if (SAT.Environment.settings('isMacOSX') === true) {
+                    //     $('input:radio').each(function() { 
+                    //         if ($(this).is(':checked') === true) {
+                    //             parametros['tipoforma'] = $(this).attr('valor');
+                    //         }
+                    //     });
+                    // }
+                                 
+                    // if (parametros['tipoforma'] === undefined && SAT.Environment.settings('isMacOSX') === true) {
+                    //     //parametros['tipoforma'] = 'contrasena';
+                                 
+                    //     $('#modalAlertOptionMac').modal('show');
+                    //     return;
+                    // }
+
+                    // var operacion = {
+                    //     operacion: "OPNUEVAFORMA",
+                    //     parametros: parametros
+                    // };
+                    // $('#DVOPER').html(JSON.stringify(operacion));
+                });
+
+                $('#cerrarSesion').on('click', function () {
+                    var operacion = {
+                        operacion: "OPCERRARS",
+                        parametros: {}
+                    };
+                    $('#DVOPER').html(JSON.stringify(operacion));
+                });
+				
+                $('#rfcCombo').on('change', function () {
+                    var rfcSelected = $(this).val();
+                    var formas = JSON.parse($("#DVOFRMGRD").html());
+
+                    var searchElements = $.grep(formas, function (e, i) {
+                        return e.idForma.indexOf(rfcSelected) >= 0;
+                    });
+                    if (searchElements.length <= 0) return;
+                    else $('.sat-list-forms ul li').remove();
+
+                    $.each(searchElements, function (k, v) {
+                        var forma = $($('.tplformas').html());
+                        forma.find('span').html(v.nombre);
+						forma.attr('idForma', v.idForma);
+						
+						 if ($('.sat-list-forms ul').hasClass("item-removing")) {
+							forma.find('span').append("<a class='close' idForma='{0}' forma='{1}' href='javascript:void(0);'><i class='icon-trash'></i></a>".format(v.idForma, v.nombre));
+							forma.find('span').append("<a class='export' idForma='{0}' forma='{1}' href='javascript:void(0);'><i class='icon-arrow-up'></i></a>".format(v.idForma, v.nombre));
+						}
+						
+                        var element = $("<li>").append(forma);
+                        element.addClass("list-group-item");
+
+                        $('.sat-list-forms ul').append(element);
+                    });
+
+                    $('.sat-list-forms ul li a').on('dblclick', function () {
+                        var operacion = {
+                            operacion: "OPCARGATEMP",
+                            parametros: { idForma: $(this).attr("idForma") }
+                        };
+                        $('#DVOPER').html(JSON.stringify(operacion));
+                    });
+					$('.sat-list-forms ul li a span a.close').tooltip({title: 'Eliminar', trigger: 'hover focus'});
+                    $('.sat-list-forms ul li a span a.close').on('click', function () {
+                        $("#modal-confirm-delete").modal("show");
+                        $("#modal-confirm-delete #mensaje-confirmacion strong").html("{0}");
+                        var mensaje = $("#modal-confirm-delete #mensaje-confirmacion").html();
+
+                        $("#modal-confirm-delete #confimar-eleminacion").attr("idForma", $(this).attr("idForma"));
+                        $("#modal-confirm-delete #mensaje-confirmacion").html(mensaje.format($(this).attr("forma")));
+                    });
+					
+					$('.sat-list-forms ul li a span a.export').tooltip({title: 'Exportar', trigger: 'hover focus'});
+                     $('.sat-list-forms ul li a span a.export').on('click', function () {
+                         $("#modal-confirm-export").modal("show");
+                         $("#modal-confirm-export #mensaje-confirmacion strong").html("{0}");
+                         var mensaje = $("#modal-confirm-export #mensaje-confirmacion").html();
+
+                         $("#modal-confirm-export #confimar-exportacion").attr("idforma", $(this).attr("idforma"));
+                         $("#modal-confirm-export #mensaje-confirmacion").html(mensaje.format($(this).attr("forma")));
+                     });
+                });
+                $('#cancelar-eliminacion').on('click', function () {
+                    $("#modal-confirm-delete").modal("hide");
+                });
+
+                $('#confimar-eleminacion').on('click', function () {
+                    var operacion = {
+                        operacion: "OPDELETEITEM",
+                        parametros: { idForma: $(this).attr("idForma") }
+                    };
+                    $('#DVOPER').html(JSON.stringify(operacion));
+                    $("#modal-confirm-delete").modal("hide");
+                });
+
+                $('#cancelar-exportacion').on('click', function () {
+                    $("#modal-confirm-export").modal("hide");
+                });
+
+                $('#confimar-exportacion').on('click', function () {
+                    var operacion = {
+                        operacion: "OPEXPORTITEM",
+                        parametros: { idForma: $(this).attr("idForma") }
+                    };
+                    $('#DVOPER').html(JSON.stringify(operacion));
+                    $("#modal-confirm-export").modal("hide");
+                });
+            })();
+        });
+    </script>
+</body>
+</html>

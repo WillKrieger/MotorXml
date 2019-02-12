@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+    <title>Declaraciones SAT</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="all">
+    <link href="css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="css/app.css" rel="stylesheet" media="all">
+
+    <style type="text/css">
+        .sat-row-compensaciones label,
+        .sat-row-compensaciones input {
+            margin-right: 5px !important;
+            width: 140px !important;
+            display: inline !important;
+        }
+
+        .panel-heading {
+            background-color: #E8E8EB !important;
+            border-color: #E8E8EB !important;
+            color: #CF3928;
+            font-family: 'Roboto Condensed', serif !important;
+            padding-bottom: 4px;
+        }
+
+        .buttonbar {
+            float: right;
+            margin-top: 5px;
+            margin-right: 5px;
+        }
+
+        .panel {
+            border: 1px solid #9da4c6 !important;
+        }
+
+        .header {
+            padding-left: 20px;
+        }
+    </style>
+    <style type="text/css">
+        ::-ms-clear {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-header">
+            <img src="img/sat.png" style="width: 77%;" />
+        </div>
+
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+                <span type="text" class="form-control" placeholder="">
+                        <b id="nombreContribuyente"></b>
+                        <label>RFC:</label>
+                        <label id="rfc"></label>
+                </span> 
+            </div>
+            <div class="form-group" style="font-size: 30px;">
+                <button id="home" type="button" class="btn btn-primary btn-red">
+                    <i class="icon-home"></i>
+                    Menú principal
+                </button>
+                <button id="cerrarSesion" type="button" class="btn btn-primary btn-red">
+                    <i class="icon-signout"></i>
+                    Cerrar sesión
+                </button>
+            </div>
+        </form>
+    </nav>
+    <!-- /navbar -->
+
+    <div class="informacion-declaracion">
+        <b>Tipo de Declaración: N/A / Ejercicio: N/A / Periodo: N/A</b>
+    </div>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <h3>Revisión de la declaración</h3>
+    </nav>
+    <!-- /nav-steps -->
+
+    <div class="container sat-container-main" style="width: 90%;">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row" style="border: solid 1px; margin-bottom: 5px; background-color: #E8E8EB !important;">
+                    <div class="panel-heading title-declaracion title-declaracion col-lg-6">
+                        <div style="clear: both;"></div>
+                    </div>
+                    <div class="titulo-panel col-lg-6" style=" margin-bottom: 5px;">
+                        <button id="enviarDeclaracion" type="button" class="btn btn-primary btn-red buttonbar">Enviar declaración</button>
+                        <button id="editarDeclaracion" type="button" class="btn btn-primary btn-red buttonbar">Regresar</button>
+                    </div>
+                </div>
+                <div class="row row-form" style="height: 460px;">
+                    <!--  	<div id="dvMarcaAgua" style="position: absolute;filter:alpha(opacity=25);-moz-opacity:.25;opacity:.25;background:url(../img/sinvalor.png) !important;background-repeat:repeat-y;z-index: 100 !important;"><img src="../img/sinvalor.png" style="width:100% !important; height:233px !important;" alt="" ></div> -->
+
+                    <div id="htmlOutput" style="width: 100%; height: 100%;">
+                        <!-- <div style="display: none; position: absolute;filter:alpha(opacity=25) !important; -moz-opacity:.25 !important; opacity:.25 !important; background:url(../img/sinvalor.png) !important; z-index: 9999 !important;"><img src="../img/sinvalor.png" style="width:100% !important; height:233px !important;" alt=""></div>	 -->
+                        <div class="icon6-wrapper">
+                            <i class="icon-refresh icon-spin icon-6"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalEnvioDeclaracion" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enviando declaración</h4>
+                </div>
+                <div class="modal-body">
+                    <i class="icon-spinner icon-spin icon-large icon-6x"></i>
+                    Estimado contribuyente, favor de permanecer en la aplicación hasta obtener el acuse de recibo o respuesta del sistema.
+			
+               
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalYesNoFirmarDeclaracion" class="modal fade" style="z-index: 9999" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Firma de la Declaración.
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </h4>
+                    <br />
+                </div>
+                <input type="hidden">
+                <!-- dialog body -->
+                <div class="modal-body">Estimado contribuyente, ¿desea firmar su declaración?</div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" class="si btn btn-primary btn-red">SI</button>
+                    <button type="button" class="no btn btn-primary btn-red">NO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalCantidadDeclaracion" class="modal fade" style="z-index: 9999" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <input type="hidden">
+                <!-- dialog body -->
+                <div class="modal-body">
+                    Cantidad a pagar en efectivo por esta declaración:
+                   
+                    <label></label>
+                    <br />
+                    ¿Desea continuar?
+			
+           
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" class="si btn btn-primary btn-red">
+                        SI
+				
+               
+                    </button>
+                    <button type="button" data-dismiss="modal" class="no btn btn-primary btn-red">
+                        NO
+				
+               
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAlertClient" class="modal fade" style="z-index: 9999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="si btn btn-primary btn-red">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="sat-totalpay hide"><span>-</span></div>
+
+    <div id="DVMONTO" class="sat-div-contenedores hide">-</div>
+    <div id="DVPLANFOR" class="sat-div-contenedores hide">-</div>
+    <div id="DVDAPREFOR" class="sat-div-contenedores hide">-</div>
+    <div id="DVOPER" class="sat-div-contenedores hide">-</div>
+    <div id="DVDECLARACIONDISCO" class="sat-div-contenedores hide">-</div>
+    <div id="DVDECLARACION" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOCON" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOALERTCLIENT" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOALERTCLIENTORIGIN" class="sat-div-contenedores hide">-</div>
+    <div id="DVPDFDECLARACION" class="sat-div-contenedores hide">-</div>
+
+    <!-- Carga los scripts despues del HTML (best-practices) -->
+    <script type='text/javascript' src="js/3rdparty/namespace.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/jquery-1.7.2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/bootstrap.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/knockout-2.3.0.js"></script>
+    <!-- Script de ayuda -->
+    <script type='text/javascript' src="js/fb.helper.js"></script>
+    <script type='text/javascript' src="js/fb.utils.js"></script>
+    <script type='text/javascript' src="js/fb.xmlform.js"></script>
+    <script type='text/javascript' src="js/sat.utils.js"></script>
+    <!-- Scripts de la aplicacion principal -->
+    <script type='text/javascript' src="js/app.js"></script>
+    <script type='text/javascript' src="js/appui.js"></script>
+    <script type='text/javascript' src="js/appconfig.js"></script>
+    <script type='text/javascript' src="js/3rdparty/base64.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/jquery.formatCurrency.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/json2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/jquery.formatCurrency.min.js"></script>
+    <script type="text/javascript">
+        "use strict";
+
+        $(document).ready(function () {
+            AppDeclaracionesSAT.initStepFour();
+            AppDeclaracionesSAT.initProxyDivsStepfour();
+        });
+
+        $("#btnImprimir").on('click', function () {
+            var operacion = {
+                operacion: "IMPRIMIRHOJATRABAJO",
+                parametros: {}
+            };
+            $('#DVOPER').html(JSON.stringify(operacion));
+        });
+
+		$('#modalCantidadDeclaracion .si').on('click', function () {
+            $('#modalCantidadDeclaracion').modal('hide');
+        });
+        
+    </script>
+</body>
+</html>

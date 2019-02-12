@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+
+    <title>Esta pagina solo es para validar los pre-requisitos de la aplicacion</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="css/app.css" rel="stylesheet" media="screen">
+
+    <style type="text/css">
+        ::-ms-clear
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-header">
+            <img src="img/sat.png" style="width: 77%;" />
+        </div>
+
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group" style="width: auto;">
+                <span type="text" class="form-control" placeholder="">
+                    <b id="nombreContribuyente"></b>[<label id="rfc"> </label>
+                    ]
+                </span>
+            </div>
+            <div class="form-group" style="font-size: 30px;">
+                <button id="cerrarSesion" type="button" class="btn btn-primary btn-red">
+                    <i class="icon-signout"></i>Cerrar sesión
+                </button>
+            </div>
+        </form>
+    </nav>
+    <!-- /navbar -->
+
+    <nav class="navbar navbar-default" role="navigation">
+        <ul class="nav navbar-nav sat-nav-steps">
+            <li class="active">
+                <a href="#">Selección de la declaración
+                </a>
+            </li>
+            <li>
+                <a href="#">Llenado de la declaración
+                </a>
+            </li>
+            <li>
+                <a href="#">Revisión de la declaración
+                </a>
+            </li>
+            <li>
+                <a href="#">Envío de la declaración
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="modalSupportBrowsers" class="modal fade" data-backdrop="static" style="z-index: 9999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                    <blockquote>
+                        <p>Se detectó que el navegador que está usando no es compatible con esta aplicación por favor use alguna de las siguientes versiones.</p>
+                        <br />
+                        <footer>
+                            <ul>
+                                <li><a target="_blank" href="http://windows.microsoft.com/es-es/internet-explorer/download-ie">Internet Explorer</a> 9 o posterior.</li>
+                                <li><a target="_blank" href="http://www.google.com/intl/es/chrome/browser/">Google Chrome</a> 25 o posterior.</li>
+                                <li><a target="_blank" href="https://www.mozilla.org/es-MX/firefox/new/">FireFox</a> 25 o posterior.</li>
+                                <li><a target="_blank" href="http://Safari.es.joyDownload.com/">Safari</a> 6 o posterior.</li>
+                            </ul>
+                        </footer>
+                    </blockquote>
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="si btn btn-primary btn-red">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modalSupportSilverlight" class="modal fade" data-backdrop="static" style="z-index: 9999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <blockquote>
+                        <p> Se requiere el plug-in de Microsoft Silverlight 5.0.61118.0 para la firma de la declaración quiere descargarlo ahora. </p>
+                        <br />
+                        <ul>
+                            <li><a href="javascript:Silverlight.getSilverlight('5.0.61118.0');">Descargar Microsoft Silverlight 5.0.61118.0</a></li>
+                        </ul>
+                    </blockquote>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="si btn btn-primary btn-red">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type='text/javascript' src="js/3rdparty/jquery-1.7.2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/bootstrap.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/Silverlight.js"></script>
+
+    <script type="text/javascript">
+        "use strict";
+
+        var minimumBrowserSupports = { FireFox: 25, Chrome: 25, IE: 9, Safari: 6 };
+        var versionSilverlightRequired = "5.0.61118.0";
+        var urlDownloadSilverligth = "";
+        var userAgent = navigator.userAgent.toLowerCase();
+
+        $.browser.chrome = /chrome/.test(navigator.userAgent.toLowerCase());
+        $.browser.firefox = /firefox/.test(navigator.userAgent.toLowerCase());
+
+        if ($.browser.chrome) {
+            userAgent = userAgent.substring(userAgent.indexOf('chrome/') + 7);
+            userAgent = userAgent.substring(0, userAgent.indexOf('.'));
+            $.browser.version = userAgent;
+            $.browser.safari = false;
+        }
+
+        if ($.browser.safari) {
+            userAgent = userAgent.substring(userAgent.indexOf('version/') + 8);
+            userAgent = userAgent.substring(0, userAgent.indexOf('.'));
+            $.browser.version = userAgent;
+        }
+        function showModalIfInvalidBrowsers() {
+            if (!isValidBrowser()) {
+                $("#modalSupportBrowsers").modal("show");
+            }
+        }
+
+        function isValidBrowser() {
+            var isValid = false;
+
+            if ($.browser.chrome) {
+                isValid = parseInt($.browser.version) >= minimumBrowserSupports.Chrome;
+            }
+            else if ($.browser.firefox) {
+                isValid = parseInt($.browser.version) >= minimumBrowserSupports.FireFox;
+            }
+            else if ($.browser.safari) {
+                isValid = parseInt($.browser.version) >= minimumBrowserSupports.Safari;
+            }
+            else if ($.browser.msie || $.browser.mozilla) {
+                isValid = parseInt($.browser.version) >= minimumBrowserSupports.IE;
+            }
+            return isValid;
+        }
+
+        function hasSilverlight() {
+            if (!Silverlight.isInstalled(versionSilverlightRequired))
+                $("#modalSupportSilverlight").modal("show");
+        }
+
+        $(function () {
+            showModalIfInvalidBrowsers();
+            if (isValidBrowser()) {
+                hasSilverlight();
+            }
+        });
+
+    </script>
+</body>
+</html>

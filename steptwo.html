@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+    <title>Declaraciones SAT</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/font-awesome.min.css" rel="stylesheet" media="screen">
+    <link href="css/app.css" rel="stylesheet" media="screen">
+    <style>
+        .container-main
+        {
+            border: solid #474748 1px;
+            padding-bottom: 15px;
+        }
+
+        .icon-2
+        {
+            font-size: 3em;
+        }
+    </style>
+    <style type="text/css">
+        ::-ms-clear
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+        <div class="navbar-header">
+            <img src="img/sat.png" style="width: 77%;" />
+        </div>
+
+        <form class="navbar-form navbar-right" role="search">
+            <div class="form-group" style="width: auto;">
+                <span type="text" class="form-control" placeholder="">
+                    <b id="nombreContribuyente"></b>
+                    <label id="rfc" style="word-wrap: normal !important;"></label>
+				</span>
+            </div>
+            <div class="form-group" style="font-size: 30px;">
+                <button id="home" type="button" class="btn btn-primary btn-red">
+                    <i class="icon-home"></i>Menú principal
+               
+                </button>
+                <button id="cerrarSesion" type="button" class="btn btn-primary btn-red">
+                    <i class="icon-signout"></i>Cerrar sesión
+               
+                </button>
+            </div>
+        </form>
+    </nav>
+    <!-- /navbar -->
+
+    <nav class="navbar navbar-default" role="navigation">
+        <h3>Paso</h3>
+        <span class="circle">1</span>
+        <h3>de 4. Selección de la declaración</h3>
+    </nav>
+    <!-- /nav-steps -->
+
+    <div class="container container-main">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Selección de Declaración</h2>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="hide tplregimenes">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                        <input name="group1" type="radio">
+                    </span>
+                    <span class="form-control"><b id="nombreregimen"></b></span>
+                </div>
+                <br />
+            </div>
+            <div class="col-lg-1"></div>
+            <div class="col-lg-5" id="regimenes">
+            </div>
+            <div class="col-lg-1">
+            </div>
+            <div id="column-dropdowns" class="col-lg-5" style="font-size: 18px; display: none;">
+                <div role="form">
+                    <div class="form-group">
+                        <label style="font-weight:normal" for="ejercicio">Ejercicio</label>
+                        <div class="row">
+                            <div class="col-xs-7">
+                                <select id="ejercicio" class="form-control" style="font-size: 16px;"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight:normal" for="periodo">Periodo</label>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <select id="periodo" class="form-control" style="font-size: 16px;">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-weight:normal" for="tipodeclaracion">Tipo de declaración</label>
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <select id="tipodeclaracion" class="form-control" style="font-size: 16px;">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group tipocomplementaria">
+                        <label style="font-weight:normal" for="tipocomplementaria">Tipo de complementaria</label>
+                        <div class="row">
+                            <div class="col-xs-9">
+                                <select id="tipocomplementaria" class="form-control" style="font-size: 16px;">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div id="column-button" class="col-lg-offset-7 col-lg-5" style="display: none">
+                <button id="signin" class="btn btn-primary btn-lg btn-red">Continuar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class='legendWrapper'>
+        <span class="help-block legend"></span>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Cargando información.</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-lg-11">
+                            <i class="icon-spinner icon-spin icon-large icon-6x"></i>
+                            Espere por favor mientras termina de cargar la información necesaria.
+					
+                       
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalValidacion" class="modal fade" style="z-index: 9999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                    La configuración de la declaración está incompleta. Favor de verificar
+			
+               
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="si btn btn-primary btn-red">
+                        Aceptar
+				
+                   
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAlertClient" class="modal fade" style="z-index: 9999">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- dialog body -->
+                <div class="modal-body">
+                </div>
+                <!-- dialog buttons -->
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="si btn btn-primary btn-red">
+                        Aceptar
+                   
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-confirm-delete" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Mensaje de confirmación</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-lg-11">
+                            <h5 id="mensaje-confirmacion">Ya Existe una Declaración con los Parámetros Seleccionados, <strong>¿Desea Continuar?,</strong> Esta Acción Borrará la Existente!!</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" id="cancelar-eliminacion">Cancelar</button>
+                    <button type="button" class="btn btn-red" id="confimar-eleminacion">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DVCA01" class="sat-div-contenedores hide">-</div>
+    <div id="DVCA02" class="sat-div-contenedores hide">-</div>
+    <div id="DVCA03" class="sat-div-contenedores hide">-</div>
+    <div id="DVCA04" class="sat-div-contenedores hide">-</div>
+    <div id="DVCA05" class="sat-div-contenedores hide">-</div>
+    <div id="DVCA06" class="sat-div-contenedores hide">-</div>
+    <div id="DVOPER" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOCON" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOALERTCLIENT" class="sat-div-contenedores hide">-</div>
+    <div id="DVINFOALERTCLIENTORIGIN" class="sat-div-contenedores hide">-</div>
+
+    <div id="DVCONFSOBREESC" class="sat-div-contenedores hide">-</div>
+
+    <!-- Carga los scripts despues del HTML (best-practices) -->
+    <script type='text/javascript' src="js/3rdparty/namespace.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/jquery-1.7.2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/bootstrap.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/knockout-2.3.0.js"></script>
+    <!-- Script de ayuda -->
+    <script type='text/javascript' src="js/fb.helper.js"></script>
+    <script type='text/javascript' src="js/fb.utils.js"></script>
+    <script type='text/javascript' src="js/fb.xmlform.js"></script>
+    <script type='text/javascript' src="js/sat.utils.js"></script>
+    <!-- Scripts de la aplicacion principal -->
+    <script type='text/javascript' src="js/app.js"></script>
+    <script type='text/javascript' src="js/appui.js"></script>
+    <script type='text/javascript' src="js/appconfig.js"></script>
+    <!-- Script para Modal de Compensaciones -->
+    <script type='text/javascript' src="js/compensaciones.js"></script>
+    <!-- Componente de construccion de html -->
+    <script type='text/javascript' src="js/fb.htmlbuilder.js"></script>
+    <!-- Plugins que generan los controles visuales (htmldom)  -->
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.cuadrocompensaciones.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.list.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.textbox.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.decimal.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.checkbox.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.radio.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.label.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.indexador.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.controlvacio.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.combobox.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.controlesgrid.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.fecha.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.cuadrodialogo.js"></script>
+    <script type='text/javascript' src="js/fbhtmlcontrols/fb.controlbase.js"></script>
+    <!--    <script type='text/javascript' src="js/fbhtmlcontrols/fb.cuadroamortizacion.js"></script>-->
+    <!-- Componente del Modelo del formulario -->
+    <script type='text/javascript' src="js/fb.viewmodel.js"></script>
+    <!-- Componente que genera las reglas y validaciones -->
+    <script type='text/javascript' src="js/fb.runtime.js"></script>
+    <!-- Componente que genera un repositorio de catalogos -->
+    <script type='text/javascript' src="js/fb.catalogs.js"></script>
+    <!-- Componente de parseo -->
+    <script type='text/javascript' src="js/fb.parser.js"></script>
+    <!-- Scripts de la aplicacion principal -->
+    <script type='text/javascript' src="js/sat.environment.js"></script>
+    <!-- Se cargan al final los scripts que no seran utilizados en un principio,
+	se modificara para cargarlos asincronamente -->
+    <script type='text/javascript' src="js/3rdparty/jquery.maskedinput.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/base64.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/json2.min.js"></script>
+    <script type='text/javascript' src="js/3rdparty/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        "use strict";
+
+        $(document).ready(function () {
+            AppDeclaracionesSAT.initStepTwo();
+            AppDeclaracionesSAT.initProxyDivs();
+
+            (function () {
+                $('#signin').on('click', function () {
+                    if ($('#regimenes input:checked').attr("idRegimen") !== undefined &&
+                        $('#ejercicio').val() !== '0' &&
+                        $('#periodo').val() !== '0' &&
+                        $('#tipodeclaracion').val() !== '0') {
+                        var operacion = {
+                            operacion: "OPDESCARGA",
+                            parametros: {
+                                regimen: $('#regimenes input:checked').attr("idRegimen"),
+                                ejercicio: $('#ejercicio').val(),
+                                periodo: $('#periodo').val(),
+                                periodotexto: $('#periodo :selected').text(),
+                                tipodeclaracion: $('#tipodeclaracion').val(),
+                                tipodeclaraciontexto: $('#tipodeclaracion :selected').text(),
+                                tipocomplementaria: $('#tipocomplementaria').val(),
+                                tipocomplementariatexto: $('#tipocomplementaria :selected').text()
+                            }
+                        };
+
+                        $('#DVOPER').html(JSON.stringify(operacion));
+                    } else {
+                        $('#modalValidacion').modal('show');
+                    }
+                });
+
+                $('#cerrarSesion').on('click', function () {
+                    var operacion = {
+                        operacion: "OPCERRARS",
+                        parametros: {}
+                    };
+                    $('#DVOPER').html(JSON.stringify(operacion));
+                });
+
+                $('#home').on('click', function () {
+                    var operacion = {
+                        operacion: "OPHOME",
+                        parametros: {}
+                    };
+                    $('#DVOPER').html(JSON.stringify(operacion));
+                });
+
+                $('#cancelar-eliminacion').on('click', function () {
+                    $("#modal-confirm-delete").modal("hide");
+                });
+
+                $('#confimar-eleminacion').on('click', function () {
+                    var operacion = {
+                        operacion: "OPDELETELOCALDEC",
+                        parametros: { respuesta: $(this).attr("respuesta") }
+                    };
+                    $('#DVOPER').html(JSON.stringify(operacion));
+                    $("#modal-confirm-delete").modal("hide");
+                });
+            })();
+        });
+    </script>
+</body>
+</html>
